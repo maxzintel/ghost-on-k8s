@@ -5,11 +5,14 @@ var path = require('path'),
     development: {
       url: 'http://localhost:2368',
       database: {
-        client: 'sqlite3',
+        client: 'mysql',
         connection: {
-          filename: path.join(process.env.GHOST_CONTENT, '/data/ghost-dev.db')
-        },
-        debug: false
+          host    : 'mysql',
+          user    : 'root',
+          password: 'root', // NOTE: DEFINITELY CHANGE THESE IN PROD.
+          database: 'ghost_db',
+          charset : 'utf8'
+        }
       },
       server: {
         host: '0.0.0.0',

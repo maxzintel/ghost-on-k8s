@@ -33,4 +33,4 @@ spec:
         - name: config
           configMap:
             defaultMode: 420
-            name: ghost-config
+            name: ghost-config-mysql
