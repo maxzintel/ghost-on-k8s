@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ghost
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      run: ghost
+  template:
+    metadata:
+      labels:
+        run: ghost
+    spec:
+      containers:
+      - name: ghost
+        image: ghost
+        resources:
+            requests:
+              cpu: "500m"
+              memory: "128Mi"
+            limits:
+              cpu: "1000m"
+              memory: "256Mi"
+        command:
+          - sh
+          - -c
+          - cp /ghost-config/ghost-config.js /var/lib/ghost/config.js && /usr/local/bin/docker-entrypoint.sh node current/index.js
+        volumeMounts:
+          - mountPath: /ghost-config
+            name: config
+      volumes:
+        - name: config
+          configMap:
+            defaultMode: 420
+            name: ghost-config
