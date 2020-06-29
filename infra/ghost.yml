@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: ghost
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       run: ghost
@@ -33,4 +33,4 @@ spec:
         - name: config
           configMap:
             defaultMode: 420
-            name: ghost-config-mysql
+            name: ghost-config-yaml
